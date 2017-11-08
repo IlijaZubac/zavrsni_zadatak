@@ -1,4 +1,18 @@
+<?php
+try {
+        $conn = new PDO('mysql:host=127.0.0.1;dbname=blog', 'root', 'vivify');
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+    catch(PDOException $e)
+    {
+        echo $e->getMessage();
+    }
 
+    $statement = $conn->prepare('SELECT * FROM posts');
+    $statement->execute();
+    $statement->setFetchMode(PDO::FETCH_ASSOC);
+    $posts = $statement->fetchAll();
+?>
 <!doctype html>
 <html lang="en">
 <head>
