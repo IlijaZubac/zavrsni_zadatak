@@ -10,3 +10,9 @@ background-color: #b34848;
 nav{
 background-color: #b34848;
 }
+.comments li {
+ list-style-type: none;
+}
+.hidden{
+display:none;
+}

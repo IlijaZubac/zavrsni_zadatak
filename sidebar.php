@@ -1,33 +1,34 @@
  
  <aside class="col-sm-3 ml-sm-auto blog-sidebar">
-            <div class="sidebar-module sidebar-module-inset">
-                <h4><a href="#">About</a></h4>
-                <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-            </div>
-            <div class="sidebar-module">
-                <h4><a href="#">Archives</a></h4>
-                <ol class="list-unstyled">
-                    <li><a href="#">March 2014</a></li>
-                    <li><a href="#">February 2014</a></li>
-                    <li><a href="#">January 2014</a></li>
-                    <li><a href="#">December 2013</a></li>
-                    <li><a href="#">November 2013</a></li>
-                    <li><a href="#">October 2013</a></li>
-                    <li><a href="#">September 2013</a></li>
-                    <li><a href="#">August 2013</a></li>
-                    <li><a href="#">July 2013</a></li>
-                    <li><a href="#">June 2013</a></li>
-                    <li><a href="#">May 2013</a></li>
-                    <li><a href="#">April 2013</a></li>
-                </ol>
-            </div>
-            <div class="sidebar-module">
-                <h4><a href="#">Elsewhere</a></h4>
-                <ol class="list-unstyled">
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Facebook</a></li>
-                </ol>
-            </div>
-        </aside><!-- /.blog-sidebar -->
+           
+    <div class="sidebar-module sidebar-module-inset">
+        <h4><a href="#">Latest posts</a></h4>
+    <?php
+
+
+try {
+        $conn = new PDO('mysql:host=127.0.0.1;dbname=novi_blog', 'root', 'vivify');
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+    catch(PDOException $e)
+    {
+        echo $e->getMessage();
+    }
+       $sqlLast = "SELECT * FROM posts ORDER BY Created_at DESC LIMIT 5";
+       $statementCom = $conn->prepare($sqlLast);
+       $statementCom->execute();
+       $statementCom->setFetchMode(PDO::FETCH_ASSOC);
+       $latestPosts = $statementCom->fetchAll();
+       // print_r($latestPosts);
+       foreach ($latestPosts as $lastPost) {
+     ?>
+     <h6><a href="single-post.php?post_id= <?php echo ($lastPost['Id']); ?> "><?php echo $lastPost['Title'] ?></a></h6>
+
+     <?php
+     }
+     ?>
+    </div>
+           
+         
+</aside><!-- /.blog-sidebar -->
  
