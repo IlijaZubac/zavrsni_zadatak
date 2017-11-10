@@ -3,9 +3,8 @@
            
     <div class="sidebar-module sidebar-module-inset">
         <h4><a href="#">Latest posts</a></h4>
+        
     <?php
-
-
 try {
         $conn = new PDO('mysql:host=127.0.0.1;dbname=novi_blog', 'root', 'vivify');
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -22,7 +21,7 @@ try {
        // print_r($latestPosts);
        foreach ($latestPosts as $lastPost) {
      ?>
-     <h6><a href="single-post.php?post_id= <?php echo ($lastPost['Id']); ?> "><?php echo $lastPost['Title'] ?></a></h6>
+     <h6><a href="singl-post.php?post_id=<?php echo ($lastPost['Id']);?>"><?php echo $lastPost['Title'] ?></a></h6>
 
      <?php
      }

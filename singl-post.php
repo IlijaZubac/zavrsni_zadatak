@@ -53,8 +53,26 @@ try {
 
                 <p class="blog-post-meta"><?php echo $post['Created_at']?> <a href="#"><?php echo $post['Author']?> </a></p>
 
+
              <?php echo $post['Body'];?>
             </div><!-- /.blog-post -->
+
+                <form action="creat-comments.php" method="POST">
+                    <label name="Author" placeholder="Author">Author:</label><br>
+                    <input type="text" name="Author"><br>
+                    <textarea name="Text" row="10" cols="30" placeholder="Ostavite svoj komentar"></textarea><br>
+                    <input type="hidden" name="Post_id" value="<?php echo $_GET['post_id']?>">
+                    <input type="submit">
+    <!--               <input type="button" onclick ="hide()" value="Hide-Show comments"> -->
+
+                </form> 
+            <div class ="removecomm">
+
+             <input type="button" onclick ="hide()" value="Hide-Show">
+             
+            </div>
+             <div class ="comments" id="comments">
+                <ul>
             <?php 
                 $statement = $conn->prepare("SELECT * FROM comments WHERE Post_id = {$_GET['post_id']}");
                 $statement->execute();
@@ -63,20 +81,17 @@ try {
 
             foreach ($comments as $singleCom){
             ?>
-            <div class ="removecomm">
-
-           <input type="button" onclick ="hide()" value="Hide-Show">
-
-            </div>
-            <div class ="comments" id="comments">
-                <ul>
+           
+ 
+             
                     <li> <?php echo $singleCom['Author'];?> </li> <br>
                     <li> <?php echo $singleCom['Text'];?> </li> <hr>
-                </ul>
-            </div>
+             <button type="button" class="btn btn-default">Delete</button>     
             <?php
-            } ?>
-     
+            } 
+            ?>
+      </ul>
+            </div>
             <nav class="blog-pagination">
                 <a class="btn btn-outline-primary" href="#">Older</a>
                 <a class="btn btn-outline-secondary disabled" href="#">Newer</a>

@@ -16,3 +16,6 @@ background-color: #b34848;
 .hidden{
 display:none;
 }
+.btn{
+column-fill: green;
+}
